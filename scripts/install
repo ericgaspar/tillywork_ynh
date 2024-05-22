@@ -8,6 +8,13 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing dependencies..." --weight=6
+
+ynh_install_nodejs --nodejs_version=$nodejs_version
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=1
@@ -38,6 +45,17 @@ ynh_script_progression --message="Adding system configurations related to $app..
 ynh_add_systemd_config
 
 yunohost service add "$app" --description="A short description of the app" --log="/var/log/$app/$app.log"
+
+#=================================================
+# INSTALL ETHERPAD
+#=================================================
+ynh_script_progression --message="Installing $app..." --weight=10
+
+pushd $install_dir
+ 	ynh_use_nodejs
+    ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install
+ 	ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm build
+popd
 
 #=================================================
 # START SYSTEMD SERVICE
