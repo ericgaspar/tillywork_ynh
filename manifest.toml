@@ -55,8 +55,8 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    url = "https://github.com/foo/bar/archive/refs/tags/v1.2.3.tar.gz"
-    sha256 = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    url = "https://github.com/tillywork/tillywork/archive/3ef5af268f482c26fe08e0ba3bdf093f2965b893.tar.gz"
+    sha256 = "1c858276a2407719c6f57d628b0b8435e3225e8837c6153929834a8482c5df2a"
 
     autoupdate.strategy = "latest_github_tag"
 
